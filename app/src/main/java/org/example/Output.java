@@ -30,9 +30,6 @@ public class Output {
         for(int i = 0 ; i < tamanho ; i++){
             grafo.addEdge(arestas.get(i).getNome(),arestas.get(i).getV1().getNome(),arestas.get(i).getV2().getNome());
         }
-
-
-        
         grafo.display();
     }
 
