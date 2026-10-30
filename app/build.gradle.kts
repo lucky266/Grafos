@@ -13,6 +13,7 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven(url = "https://oss.sonatype.org/content/repositories/releases/")
 }
 
 dependencies {
@@ -23,6 +24,8 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation("org.graphstream:gs-core:2.0")
+    implementation("org.graphstream:gs-ui-swing:2.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

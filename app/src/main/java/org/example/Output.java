@@ -1,5 +1,8 @@
 package org.example;
 
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +13,30 @@ public class Output {
         this.g = g;
     }
     
-    void print(){
+    void printGrafo(){
+        System.setProperty("org.graphstream.ui", "swing"); 
+        List<Vertice> vertices = new ArrayList<Vertice>(g.getVertices());
+        List<Aresta> arestas = new ArrayList<Aresta>(g.getArestas());
+        Graph grafo = new MultiGraph("G1");
+
+        // Vertices:
+        int tamanho = vertices.size();
+        for(int i = 0 ; i < tamanho ; i++){
+            grafo.addNode(vertices.get(i).getNome());
+        }
+
+        // Arestas:
+        tamanho = arestas.size();
+        for(int i = 0 ; i < tamanho ; i++){
+            grafo.addEdge(arestas.get(i).getNome(),arestas.get(i).getV1().getNome(),arestas.get(i).getV2().getNome());
+        }
+
+
+        
+        grafo.display();
+    }
+
+    void printText(){
         List<Vertice> vertices = new ArrayList<Vertice>(g.getVertices());
         List<Aresta> arestas = new ArrayList<Aresta>(g.getArestas());
         

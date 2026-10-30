@@ -1,4 +1,6 @@
 package org.example;
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -7,16 +9,15 @@ public class App {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         List<Vertice> verticesList = new ArrayList<>();
         List<Aresta> arestaList = new ArrayList<>();
         verticesList = createRandomVertices(verticesList);
         arestaList = createRandomArestas(arestaList,verticesList);
 
-
         Grafo G = new Grafo(verticesList, arestaList);
         Output Saida = new Output(G);
-        Saida.print();
+        Saida.printGrafo();
     }
     
     static int aleatorio(int min, int max){
@@ -25,7 +26,7 @@ public class App {
 
     public static List<Vertice> createRandomVertices(List<Vertice> verticesList){
         List<Aresta> arestasTemp = new ArrayList<>();
-        int verticesQuantidade = aleatorio(10,10);
+        int verticesQuantidade = aleatorio(15,30);
         for(int i = 0 ; i < verticesQuantidade ; i++){
             verticesList.add(new Vertice("v"+ i, arestasTemp));
         }
@@ -34,7 +35,7 @@ public class App {
 
  
     public static List<Aresta> createRandomArestas(List<Aresta> arestaList,List<Vertice> verticesList){
-        int arestaQuantidade = aleatorio(10,20);
+        int arestaQuantidade = aleatorio(30,50);
         int pesoMax = 5;
         int pesoMin = 1;
         int tamanhoVerticesList = verticesList.size() - 1;
