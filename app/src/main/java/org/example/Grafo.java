@@ -43,7 +43,11 @@ public class Grafo {
         List<Aresta> arestasTemp = new ArrayList<>();
         int verticesQuantidade = aleatorio(vMin,vMax);
         for(int i = 0 ; i < verticesQuantidade ; i++){
-            verticesList.add(new Vertice("v"+ i, arestasTemp));
+            if(i > verticesList.size() - 1){
+                verticesList.add(new Vertice("v"+ i, arestasTemp));
+            }else{               
+                verticesList.set(i,new Vertice("v"+i,arestasTemp));
+            }
         }
         return verticesList;
     }
@@ -52,9 +56,13 @@ public class Grafo {
         int tamanhoVerticesList = verticesList.size() - 1;
         for(int i = 0 ; i < arestaQuantidade ; i++){
             int pesoAleatorio = aleatorio(aPesoMin,aPesoMax);
-            int indiceVerticeAleatorio1 = aleatorio(0, tamanhoVerticesList);
-            int indiceVerticeAleatorio2 = aleatorio(0, tamanhoVerticesList);
-            arestaList.add(new Aresta(verticesList.get(indiceVerticeAleatorio1),verticesList.get(indiceVerticeAleatorio2),pesoAleatorio,"a"+i));
+            int randVIndex1 = aleatorio(0, tamanhoVerticesList);
+            int randVIndex2 = aleatorio(0, tamanhoVerticesList);
+            if(i > arestaList.size() - 1){
+                arestaList.add(new Aresta(verticesList.get(randVIndex1),verticesList.get(randVIndex2),pesoAleatorio,"a"+i));
+            }else{
+                arestaList.set(i,new Aresta(verticesList.get(randVIndex1),verticesList.get(randVIndex2),pesoAleatorio,"a"+i));
+            }
         }
         return arestaList;
     }

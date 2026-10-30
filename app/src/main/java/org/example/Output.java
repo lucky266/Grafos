@@ -8,16 +8,34 @@ import java.util.List;
 
 public class Output {
     private Grafo g;
-
+    
     public Output(Grafo g) {
         this.g = g;
     }
+    private Graph grafo = new MultiGraph("Gigga nigga");
+
+      public Grafo getG() {
+        return g;
+    }
+    public void setG(Grafo g) {
+        this.g = g;
+    }
+    public Graph getGrafo() {
+        return grafo;
+    }
+    public void setGrafo(Graph grafo) {
+        this.grafo = grafo;
+    }
     
-    void printGrafo(){
+    public void mostrarGrafo(){
+        System.setProperty("org.graphstream.ui", "swing"); 
+        grafo.display();
+    }
+    void updateGrafo(){
+        grafo.clear();
         System.setProperty("org.graphstream.ui", "swing"); 
         List<Vertice> vertices = new ArrayList<Vertice>(g.getVertices());
         List<Aresta> arestas = new ArrayList<Aresta>(g.getArestas());
-        Graph grafo = new MultiGraph("G1");
 
         // Vertices:
         int tamanho = vertices.size();
@@ -30,7 +48,6 @@ public class Output {
         for(int i = 0 ; i < tamanho ; i++){
             grafo.addEdge(arestas.get(i).getNome(),arestas.get(i).getV1().getNome(),arestas.get(i).getV2().getNome());
         }
-        grafo.display();
     }
 
     void printText(){
@@ -49,4 +66,5 @@ public class Output {
             }
         }
     }
+  
 }
