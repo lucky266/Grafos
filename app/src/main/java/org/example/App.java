@@ -10,9 +10,9 @@ public class App {
         Output Saida = new Output(G);
         Saida.mostrarGrafo();
         while(true){
-             G.gerarGrafoAleatorio(1,3,0,5,1,5);
+             G.gerarGrafoAleatorio(1,50,0,90,1,20);
              Saida.updateGrafo();
-             Thread.sleep(4500);
+             Thread.sleep(10000);
         }
     }
 }

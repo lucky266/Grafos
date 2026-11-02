@@ -66,8 +66,22 @@ public class Grafo {
         }
         return arestaList;
     }
- 
-    
-    
-    
+    // Fim gerador de grafos
+
+    // Atualizar lista de arestas na classe Vertice
+    void inserirListaEmVertice(Vertice vertice, Aresta aresta){
+        List<Aresta> ligacoes = vertice.getArestas();
+        ligacoes.add(aresta);
+    }
+    void updateListEmVertice(){
+        int tamanhoVerticesList = vertices.size();
+        if(tamanhoVerticesList<1){ return ; }
+        int tamanhoArestasList = arestas.size();
+        for(int i = 0 ; i < tamanhoArestasList ; i++){
+            Aresta aresta = arestas.get(i);
+            inserirListaEmVertice(aresta.getV1(), aresta);
+            inserirListaEmVertice(aresta.getV2(), aresta);
+        }
+    }
+    // Fim atualizar lista de arestas na classe Vertice
 }   
