@@ -12,7 +12,7 @@ public class Output {
     public Output(Grafo g) {
         this.g = g;
     }
-    private Graph grafo = new MultiGraph("Gigga nigga");
+    private Graph grafo = new MultiGraph(g.getGrafoNome());
 
       public Grafo getG() {
         return g;
@@ -35,11 +35,11 @@ public class Output {
         grafo.clear();
         grafo.setAttribute("ui.stylesheet",
                 "node { " +
-                        "  size: 35px, 35px; " +
+                        "  size: 23px, 23px; " +
                         "  fill-color: #7c7c76; " +
                         "  text-mode: normal; " +
-                        "  text-size: 24; }" +
-                "edge { text-mode: normal; text-size: 20; text-alignment: along;}");
+                        "  text-size: 19; }" +
+                "edge { text-mode: normal; text-size: 20; text-alignment: under;}");
         System.setProperty("org.graphstream.ui", "swing"); 
         List<Vertice> vertices = new ArrayList<Vertice>(g.getVertices());
         List<Aresta> arestas = new ArrayList<Aresta>(g.getArestas());
@@ -58,7 +58,7 @@ public class Output {
                 arestas.get(i).getNome(),
                 arestas.get(i).getV1().getNome(),
                 arestas.get(i).getV2().getNome() 
-            ).setAttribute("ui.label", arestas.get(i).getNome() + " : " + arestas.get(i).getPeso());
+            ).setAttribute("ui.label", arestas.get(i).getPeso());
         }
     }
 
