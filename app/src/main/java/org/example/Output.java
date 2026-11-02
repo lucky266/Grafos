@@ -28,11 +28,18 @@ public class Output {
     }
     
     public void mostrarGrafo(){
-        System.setProperty("org.graphstream.ui", "swing"); 
+        System.setProperty("org.graphstream.ui", "swing");
         grafo.display();
     }
     void updateGrafo(){
         grafo.clear();
+        grafo.setAttribute("ui.stylesheet",
+                "node { " +
+                        "  size: 35px, 35px; " +
+                        "  fill-color: #7c7c76; " +
+                        "  text-mode: normal; " +
+                        "  text-size: 24; }" +
+                "edge { text-mode: normal; text-size: 20; text-alignment: along;}");
         System.setProperty("org.graphstream.ui", "swing"); 
         List<Vertice> vertices = new ArrayList<Vertice>(g.getVertices());
         List<Aresta> arestas = new ArrayList<Aresta>(g.getArestas());
@@ -40,13 +47,18 @@ public class Output {
         // Vertices:
         int tamanho = vertices.size();
         for(int i = 0 ; i < tamanho ; i++){
-            grafo.addNode(vertices.get(i).getNome());
+            grafo.addNode(vertices.get(i).getNome()).setAttribute("ui.label", vertices.get(i).getNome());
         }
 
         // Arestas:
         tamanho = arestas.size();
         for(int i = 0 ; i < tamanho ; i++){
-            grafo.addEdge(arestas.get(i).getNome(),arestas.get(i).getV1().getNome(),arestas.get(i).getV2().getNome());
+            // daria pra melhorar visualização se adicionar condicional pra cada tipo de aresta
+            grafo.addEdge(
+                arestas.get(i).getNome(),
+                arestas.get(i).getV1().getNome(),
+                arestas.get(i).getV2().getNome() 
+            ).setAttribute("ui.label", arestas.get(i).getNome() + " : " + arestas.get(i).getPeso());
         }
     }
 
