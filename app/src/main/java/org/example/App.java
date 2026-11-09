@@ -37,7 +37,7 @@ public class App {
         G.setArestas(arestas);
 
         
-        G.gerarGrafoAleatorio(2, 3, 10, 50, 0, 0);
+        G.gerarGrafoAleatorio(5, 5, 40, 500, 0, 0);
         
         Saida.updateGrafo();
         Saida.printText();

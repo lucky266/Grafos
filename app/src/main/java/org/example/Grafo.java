@@ -129,6 +129,7 @@ public class Grafo {
         }
     }
     void removerArestasDuplas(){
+        ordenarArestas();
         int tamanhoVerticesList = vertices.size();
         for(int v = 0; v < tamanhoVerticesList ; v++){ // Varre Vertices
             List<Aresta> vArestas = vertices.get(v).getArestas();
@@ -138,9 +139,10 @@ public class Grafo {
                     Aresta a1 = vArestas.get(i);
                     for(int j = i+1 ; j < tamanhoVArestasList ; j++){
                         Aresta a2 = vArestas.get(j);
-                        if(a1.getV1().getNome() == a2.getV1().getNome() && a1.getV2().getNome() == a2.getV2().getNome() && a1.getV1()!=a2.getV2()){ // Se saem dele mesmo e conecta em outro igual
+                        if(a1.getV1() == a2.getV1() && a1.getV2() == a2.getV2() && a1.getV1()!=a2.getV2()){ // Se saem dele mesmo e conecta em outro igual
                             removerAresta(a2); // remove
                             tamanhoVArestasList = vArestas.size(); // atualiza o tamanho das arestas
+                            j--;
                         }
                     }
                 }
