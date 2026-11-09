@@ -31,6 +31,8 @@ public class Grafo {
 
     // gerar grafos aleatorios:
     public void gerarGrafoAleatorio(int vMin, int vMax, int aMin, int aMax, int aPesoMin, int aPesoMax){
+        vertices.clear(); // Adicionado pra evitar sobescrever grafo ja existente
+        arestas.clear();
         vertices = createRandomVertices(vertices,vMin,vMax);
         arestas = createRandomArestas(arestas,vertices,aMin,aMax,aPesoMin,aPesoMax);
     }
@@ -68,8 +70,7 @@ public class Grafo {
     }
     // Fim gerador de grafos
 
-  
-      // Atualizar lista de arestas na classe Vertice
+    // Atualizar lista de arestas na classe Vertice
     void updateListEmVertice(){ 
         int tamanhoVerticesList = vertices.size();
         if(tamanhoVerticesList<1){ return ; }
@@ -113,31 +114,37 @@ public class Grafo {
     }
     void subgrafoSimples(){
         removerLoops();
+        removerArestasDuplas();
     }
-    /*void removerArestasDuplas(){ // TODO: Conseguir fazer essa função 
-        int tamanhoVerticesList = vertices.size();
+    void ordenarArestas(){
         int tamanhoArestasList = arestas.size();
-        // Ordenar? 
+        // Ordenar
         for(int i = 0 ; i < tamanhoArestasList ; i++){
             Aresta aresta = arestas.get(i);
-            if(aresta.getV1().getNome().compareTo(aresta.getV2().getNome())==-1){
+            if(aresta.getV1().getNome().compareTo(aresta.getV2().getNome())>0){
                 Vertice tmp = aresta.getV1();
                 aresta.setV1(aresta.getV2());
                 aresta.setV2(tmp);
             }
         }
-
-        // Metodo 1: 
-        for(int i = 0 ; i < tamanhoArestasList ; i++){
-            for(int  j = i ; j < tamanhoArestasList ; j++){
-                if(arestas.get(i).getV1().getNome() == arestas.get(j).getV2().getNome()){
-                    System.out.printf("%d %d \n",i,j);
-                    removerAresta(arestas.get(j));
-                    tamanhoArestasList = arestas.size();
-                    i=0;
-                    j=i;
+    }
+    void removerArestasDuplas(){
+        int tamanhoVerticesList = vertices.size();
+        for(int v = 0; v < tamanhoVerticesList ; v++){ // Varre Vertices
+            List<Aresta> vArestas = vertices.get(v).getArestas();
+            int tamanhoVArestasList = vArestas.size();
+            if(tamanhoVArestasList > 1){ // Se vertice tem mais de uma aresta conectada a ele
+                for(int i = 0 ; i < tamanhoVArestasList ; i++){ // Compara suas arestas com elas mesmas
+                    Aresta a1 = vArestas.get(i);
+                    for(int j = i+1 ; j < tamanhoVArestasList ; j++){
+                        Aresta a2 = vArestas.get(j);
+                        if(a1.getV1().getNome() == a2.getV1().getNome() && a1.getV2().getNome() == a2.getV2().getNome() && a1.getV1()!=a2.getV2()){ // Se saem dele mesmo e conecta em outro igual
+                            removerAresta(a2); // remove
+                            tamanhoVArestasList = vArestas.size(); // atualiza o tamanho das arestas
+                        }
+                    }
                 }
             }
         }
-    }*/
-}   
+    }
+}
