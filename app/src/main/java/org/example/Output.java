@@ -12,7 +12,7 @@ public class Output {
     public Output(Grafo g) {
         this.g = g;
     }
-    private Graph grafo = new MultiGraph(g.getGrafoNome());
+    private Graph grafo = new MultiGraph("1");
 
       public Grafo getG() {
         return g;

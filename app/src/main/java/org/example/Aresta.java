@@ -22,4 +22,16 @@ public class Aresta {
     public String getNome() {
         return nome;
     }
+    public void setV1(Vertice v1) {
+        this.v1 = v1;
+    }
+    public void setV2(Vertice v2) {
+        this.v2 = v2;
+    }
+    public void setPeso(int peso) {
+        this.peso = peso;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

@@ -19,5 +19,11 @@ public class Vertice {
     }
     public void setArestas(List<Aresta> arestas) {
         this.arestas = new ArrayList<>(arestas);
-    }    
+    }   
+    void vincularAresta(Aresta aresta){
+        arestas.add(aresta);
+    }
+    void desvincularAresta(Aresta aresta){
+        arestas.remove(aresta);
+    }
 }

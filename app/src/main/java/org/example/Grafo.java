@@ -68,20 +68,76 @@ public class Grafo {
     }
     // Fim gerador de grafos
 
-    // Atualizar lista de arestas na classe Vertice
-    void inserirListaEmVertice(Vertice vertice, Aresta aresta){
-        List<Aresta> ligacoes = vertice.getArestas();
-        ligacoes.add(aresta);
-    }
-    void updateListEmVertice(){
+  
+      // Atualizar lista de arestas na classe Vertice
+    void updateListEmVertice(){ 
         int tamanhoVerticesList = vertices.size();
         if(tamanhoVerticesList<1){ return ; }
         int tamanhoArestasList = arestas.size();
         for(int i = 0 ; i < tamanhoArestasList ; i++){
             Aresta aresta = arestas.get(i);
-            inserirListaEmVertice(aresta.getV1(), aresta);
-            inserirListaEmVertice(aresta.getV2(), aresta);
+            aresta.getV1().vincularAresta(aresta);
+            aresta.getV2().vincularAresta(aresta);
         }
     }
-    // Fim atualizar lista de arestas na classe Vertice
+
+    // Operações em grafos:
+    void removerAresta(Aresta arestaAlvo){
+        // Desvincula
+        arestaAlvo.getV1().desvincularAresta(arestaAlvo);
+        arestaAlvo.getV2().desvincularAresta(arestaAlvo);
+        arestas.remove(arestaAlvo);
+        arestaAlvo=null;
+    }
+    void removerVertice(Vertice verticeAlvo){
+        List<Aresta> arestasVinculadas = verticeAlvo.getArestas();
+        if(!arestasVinculadas.isEmpty()){
+            for(int i = 0; i < arestasVinculadas.size() ; i++){
+                removerAresta(arestasVinculadas.get(i));
+            }
+        }
+        vertices.remove(verticeAlvo);
+        verticeAlvo=null;
+    }
+    // Criar subgrafo simples:
+    void removerLoops(){
+        int tamanhoArestasList = arestas.size();
+        // Remove arestas que conectam no mesmo vertice:
+        for(int i = 0 ; i < tamanhoArestasList ; i++){
+            if(arestas.get(i).getV1()==arestas.get(i).getV2()){
+                removerAresta(arestas.get(i));
+                tamanhoArestasList = arestas.size();
+                i=-1;
+            }
+        }
+    }
+    void subgrafoSimples(){
+        removerLoops();
+    }
+    /*void removerArestasDuplas(){ // TODO: Conseguir fazer essa função 
+        int tamanhoVerticesList = vertices.size();
+        int tamanhoArestasList = arestas.size();
+        // Ordenar? 
+        for(int i = 0 ; i < tamanhoArestasList ; i++){
+            Aresta aresta = arestas.get(i);
+            if(aresta.getV1().getNome().compareTo(aresta.getV2().getNome())==-1){
+                Vertice tmp = aresta.getV1();
+                aresta.setV1(aresta.getV2());
+                aresta.setV2(tmp);
+            }
+        }
+
+        // Metodo 1: 
+        for(int i = 0 ; i < tamanhoArestasList ; i++){
+            for(int  j = i ; j < tamanhoArestasList ; j++){
+                if(arestas.get(i).getV1().getNome() == arestas.get(j).getV2().getNome()){
+                    System.out.printf("%d %d \n",i,j);
+                    removerAresta(arestas.get(j));
+                    tamanhoArestasList = arestas.size();
+                    i=0;
+                    j=i;
+                }
+            }
+        }
+    }*/
 }   
