@@ -71,7 +71,7 @@ public class Grafo {
     // Fim gerador de grafos
 
     // Atualizar lista de arestas na classe Vertice
-    void updateListEmVertice(){ 
+    private void updateListEmVertice(){ 
         int tamanhoVerticesList = vertices.size();
         if(tamanhoVerticesList<1){ return ; }
         int tamanhoArestasList = arestas.size();
@@ -116,7 +116,7 @@ public class Grafo {
         removerLoops();
         removerArestasDuplas();
     }
-    void ordenarArestas(){
+    private void ordenarArestas(){
         int tamanhoArestasList = arestas.size();
         // Ordenar
         for(int i = 0 ; i < tamanhoArestasList ; i++){
@@ -128,7 +128,8 @@ public class Grafo {
             }
         }
     }
-    void removerArestasDuplas(){
+    private void removerArestasDuplas(){
+        updateListEmVertice();
         ordenarArestas();
         int tamanhoVerticesList = vertices.size();
         for(int v = 0; v < tamanhoVerticesList ; v++){ // Varre Vertices
