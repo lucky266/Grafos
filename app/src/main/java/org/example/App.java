@@ -60,6 +60,13 @@ public class App {
         G.removerArestasDuplas();
         Saida.updateGrafo();
         Saida.printText();
+
+        JOptionPane.showMessageDialog(null, "Pressione ENTER para continuar...");
+        G.updateListEmVertice();
+        System.out.println("Remover loops");
+        G.removerLoops();
+        Saida.updateGrafo();
+        Saida.printText();
         
 
         
