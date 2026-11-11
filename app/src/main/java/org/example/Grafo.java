@@ -1,7 +1,7 @@
 package org.example;
 import java.util.List;
 import java.util.ArrayList;
-public class Grafo {
+public class Grafo implements Cloneable {
     private List<Vertice> vertices = new ArrayList<>();
     private List<Aresta> arestas = new ArrayList<>();
     private String grafoNome = new String();
@@ -150,4 +150,10 @@ public class Grafo {
             }
         }
     }
+    @Override
+    public Grafo clone() throws CloneNotSupportedException {
+        return (Grafo) super.clone();
+    }
+
+
 }
